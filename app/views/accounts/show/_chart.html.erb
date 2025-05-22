@@ -18,6 +18,9 @@
         <div class="bg-loader rounded-md h-7 w-20"></div>
       <% else %>
         <%= tag.p format_money(account.balance_money), class: "text-primary text-3xl font-medium truncate" %>
+        <% if account.currency != Current.family.currency %>
+          <%= tag.p format_money(account.balance_money.exchange_to(Current.family.currency, fallback_rate: 1).amount), class: "text-sm font-medium text-secondary" %>
+        <% end %>
       <% end %>
     </div>
 
